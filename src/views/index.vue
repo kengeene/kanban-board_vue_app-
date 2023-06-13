@@ -2,10 +2,10 @@
   <div class="container">
     <div class="header">
       <el-row :gutter="5">
-        <el-col :cols="10">
+        <el-col :span="10">
           <search-component />
         </el-col>
-        <el-col>
+        <el-col :span="10">
           <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
         </el-col>
       </el-row>
@@ -53,5 +53,6 @@ export default {
 }
 .header {
   width: 100%;
+  margin-bottom: 20px;
 }
 </style>
