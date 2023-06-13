@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createApp } from "vue";
 import ElementPlus from "element-plus";
 import App from "./App.vue";
