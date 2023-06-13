@@ -19,10 +19,30 @@ const useTasks = () => {
     }
   };
 
+  const updateTaskStatuses = (tasksToUpdate, updateStatus) => {
+    try {
+      const filteredTasks = tasksToUpdate.filter((x) => {
+        return x.taskStatus !== updateStatus;
+      });
+
+      for (const task of filteredTasks) {
+        task.taskStatus = updateStatus;
+        showNotification(
+          "success",
+          `Successfully updated task ${task.taskId}`,
+          `To status '${updateStatus}'`
+        );
+      }
+    } catch (e) {
+      showNotification("error", "Failed fetching taks", e);
+    }
+  };
+
   return {
     get,
     taskList,
     search,
+    updateTaskStatuses,
   };
 };
 

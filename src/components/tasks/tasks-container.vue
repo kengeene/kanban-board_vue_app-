@@ -11,6 +11,8 @@
           item-key="taskId"
           group="tasks"
           class="tasks__draggable"
+          :component-data="getComponentData()"
+          @update:model-value="updateModel(task.tickets, task.title)"
         >
           <template #item="{ element: ticket }">
             <task-card :key="index" :task="ticket" />
@@ -36,7 +38,7 @@ export default {
   },
   setup() {
     const { get: getStatuses, statusList: statuses } = useStatus();
-    const { get: getTasks, taskList } = useTasks();
+    const { get: getTasks, taskList, updateTaskStatuses } = useTasks();
     const tasks = ref([]);
 
     onMounted(async () => {
@@ -53,7 +55,34 @@ export default {
     const taskCount = computed(() => tasks.value.length);
     const rowSpan = ref(5);
 
+    const activeNames = ref(null);
+
+    const handleChange = () => {
+      // to-do: add logic for handling change
+    };
+
+    const updateModel = (taskList, currentStatus) => {
+      updateTaskStatuses(taskList, currentStatus);
+    };
+
+    const inputChanged = (value) => {
+      activeNames.value = value;
+    };
+
+    const getComponentData = () => {
+      // Can handle different changes
+      return {
+        onChange: handleChange,
+        onInput: inputChanged,
+        wrap: true,
+        value: "",
+      };
+    };
+
     return {
+      updateModel,
+      activeNames,
+      getComponentData,
       rowSpan,
       taskCount,
       tasks,
