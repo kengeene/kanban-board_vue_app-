@@ -2,12 +2,12 @@
     <div>
         <el-row :gutter="20">
             <el-col :span="rowSpan" class="tasks__column"
-            v-for="status, index in statuses" :key="index">
+             v-for="task, index in tasks" :key="index">
                 <h2 class="tasks__heading">
-                    {{ status.status }}
+                    {{ task.title }}
                 </h2>
-                <task-card :title="task.title" :tickets="task.tickets"
-                v-for="task, index in tasks" :key="index"/>
+                <task-card v-for="ticket, index in task.tickets"
+                :task="ticket" :key="index"/>
         </el-col>
         </el-row>
     </div>
@@ -16,9 +16,10 @@
 <script>
 import taskCard from '@/components/task-card.vue';
 import {
-  ref, computed, reactive, onMounted,
+  ref, computed, onMounted,
 } from 'vue';
 import useStatus from '@/composibles/useStatuses';
+import useTasks from '@/composibles/useTasks';
 
 export default {
   name: 'tasks',
@@ -27,17 +28,21 @@ export default {
   },
   setup() {
     const { get: getStatuses, statusList: statuses } = useStatus();
+    const { get: getTasks, taskList } = useTasks();
+    const tasks = ref([]);
 
     onMounted(async () => {
       await getStatuses();
+      await getTasks();
+
+      statuses.value.forEach((status) => {
+        tasks.value.push({
+          title: status.status,
+          tickets: taskList.value.filter((task) => task.taskStatus === status.status),
+        });
+      });
     });
-    const tasks = reactive([
-      { title: 1, tickets: [] },
-      { title: 2, tickets: [] },
-      { title: 3, tickets: [] },
-      { title: 4, tickets: [] },
-    ]);
-    const taskCount = computed(() => tasks.length);
+    const taskCount = computed(() => tasks.value.length);
     const rowSpan = ref(6);
 
     return {
