@@ -6,7 +6,11 @@
                 <h2 class="tasks__heading">
                     {{ task.title }}
                 </h2>
-          <draggable v-model="task.tickets" column="tasks" item-key="taskId" group="tasks">
+          <draggable
+          v-model="task.tickets"
+          column="tasks"
+          item-key="taskId"
+          group="tasks" class="tasks__draggable">
             <template #item="{element: ticket}">
                 <task-card :task="ticket" :key="index"/>
             </template>
@@ -48,7 +52,7 @@ export default {
       });
     });
     const taskCount = computed(() => tasks.value.length);
-    const rowSpan = ref(6);
+    const rowSpan = ref(5);
 
     return {
       rowSpan,
@@ -81,6 +85,10 @@ export default {
     }
     &__column{
         background-color: #f4f5f7;
+    }
+
+    &__draggable{
+      min-height: 100%;
     }
 }
 </style>
