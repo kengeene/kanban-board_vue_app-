@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <search-component/>
-    <tasks/>
+    <tasks-container/>
   </div>
 </template>
 
 <script>
-import tasks from '@/components/tasks.vue';
+import tasksContainer from '@/components/tasks/tasks-container.vue';
 import searchComponent from '@/components/search/index.vue';
 
 export default {
   name: 'Home',
   components: {
-    tasks,
+    tasksContainer,
     searchComponent,
   },
 };

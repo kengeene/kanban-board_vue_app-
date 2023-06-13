@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import taskCard from '@/components/task-card.vue';
 import {
   ref, computed, onMounted,
 } from 'vue';
 import useStatus from '@/composibles/useStatuses';
 import useTasks from '@/composibles/useTasks';
+import taskCard from '@/components/tasks/task.vue';
 
 export default {
   name: 'tasks',
