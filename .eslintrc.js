@@ -13,7 +13,8 @@ module.exports = {
     "vue/multi-word-component-names": "off",
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak":"off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-plusplus": "off"
   },
   overrides: [
     {
