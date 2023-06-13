@@ -4,7 +4,7 @@ module.exports = () => {
   const data = {
     tasks: [],
     users: [],
-    taskStatuses: ['Pending', 'In Progress', 'In QA', 'Done'],
+    taskStatuses: [{ id: 1, status: 'Pending' }, { id: 2, status: 'In Progress' }, { id: 3, status: 'In QA' }, { id: 4, status: 'Done' }],
     taskTypes: ['Bug', 'Feature'],
   };
 

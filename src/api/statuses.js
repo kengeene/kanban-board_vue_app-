@@ -2,7 +2,7 @@ import request from '@/utils/requests';
 
 export async function getStatuses(data) {
   return request({
-    url: '/statuses',
+    url: 'http://localhost:3000/taskStatuses',
     method: 'get',
     data,
   });
