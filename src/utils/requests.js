@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 // create an axios instance
 const service = axios.create({
@@ -13,7 +13,6 @@ service.interceptors.request.use(
   (error) =>
     // do something with request error
     Promise.reject(error)
-  ,
 );
 
 // response interceptor
@@ -36,11 +35,9 @@ service.interceptors.response.use(
     return null;
   },
   (err) => {
-    const {
-      response, data, message, error,
-    } = err;
-    throw response || data || message || error || 'Error with request';
-  },
+    const { response, data, message, error } = err;
+    throw response || data || message || error || "Error with request";
+  }
 );
 
 export default service;

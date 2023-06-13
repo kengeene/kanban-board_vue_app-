@@ -1,18 +1,18 @@
 <template>
-    <div>
-        <el-input placeholder="Search" v-model="search">
-      <template v-slot:prepend >
+  <div>
+    <el-input v-model="search" placeholder="Search">
+      <template #prepend>
         <el-button icon="el-icon-search"></el-button>
       </template>
     </el-input>
-    </div>
+  </div>
 </template>
 
 <script>
-import useTasks from '@/composibles/useTasks';
+import useTasks from "@/composibles/useTasks";
 
 export default {
-  name: 'Search',
+  name: "Search",
   setup() {
     const { search } = useTasks();
 
@@ -23,6 +23,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

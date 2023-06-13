@@ -1,4 +1,4 @@
-import { ElNotification } from 'element-plus';
+import { ElNotification } from "element-plus";
 
 const useNotifications = () => {
   const showNotification = (notificationType, notificationTitle, notificationMessage) => {

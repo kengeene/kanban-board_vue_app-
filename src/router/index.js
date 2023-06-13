@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     // Use lazy loaded routes to render components faster
-    component: () => import('@/views/index.vue'),
+    component: () => import("@/views/index.vue"),
   },
 ];
 
