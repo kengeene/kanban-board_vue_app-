@@ -1,5 +1,5 @@
 <template>
-  <el-card class="task-card" :data-tooltip="task.title">
+  <el-card class="task-card">
     <h3 class="task-card__title">{{ task.title }}</h3>
     <div class="task-card__properties">
       <span>

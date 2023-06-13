@@ -1,6 +1,6 @@
-import { getTasks } from "@/api/tasks";
+import { getTasks, getTaskTypes } from "@/api/tasks";
 import useNotifications from "@/utils/notifications";
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 
 const useTasks = () => {
@@ -8,6 +8,11 @@ const useTasks = () => {
   const { showNotification } = useNotifications();
   const store = useStore();
   const search = ref("");
+  const taskTypes = computed(() => store.getters.getTaskTypes);
+
+  onMounted(async () => {
+    await getAllTaskTypes();
+  });
 
   const get = async () => {
     try {
@@ -34,11 +39,21 @@ const useTasks = () => {
         );
       }
     } catch (e) {
+      showNotification("error", "Failed updating tasks", e);
+    }
+  };
+
+  const getAllTaskTypes = async () => {
+    try {
+      const { data } = await getTaskTypes();
+      store.commit("setTaskTypes", data);
+    } catch (e) {
       showNotification("error", "Failed fetching taks", e);
     }
   };
 
   return {
+    taskTypes,
     get,
     taskList,
     search,

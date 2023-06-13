@@ -1,14 +1,17 @@
 import { getStatuses } from "@/api/statuses";
 import useNotifications from "@/utils/notifications";
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 const useStatuses = () => {
-  const statusList = ref([]);
   const { showNotification } = useNotifications();
+  const store = useStore();
+  const statusList = computed(() => store.getters.getStatuses);
+
   const get = async () => {
     try {
       const { data } = await getStatuses();
-      statusList.value = data;
+      store.commit("setStatuses", data);
     } catch (e) {
       showNotification("error", "Failed fetching statuses", e);
     }

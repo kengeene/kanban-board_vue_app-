@@ -7,3 +7,11 @@ export async function getTasks(data) {
     data,
   });
 }
+
+export async function getTaskTypes(data) {
+  return request({
+    url: "http://localhost:3000/taskTypes",
+    method: "get",
+    data,
+  });
+}

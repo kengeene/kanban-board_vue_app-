@@ -1,17 +1,20 @@
 <template>
   <div class="container">
     <div class="header">
-      <el-row :gutter="10">
-        <el-cols :cols="10">
+      <el-row :gutter="5">
+        <el-col :cols="10">
           <search-component />
-        </el-cols>
-        <el-cols :cols="5">
-          <el-button type="primary" round @click="createIssueDialog = true">Create Issue</el-button>
-        </el-cols>
+        </el-col>
+        <el-col>
+          <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
+        </el-col>
       </el-row>
     </div>
     <tasks-container />
-    <create-task-dialog v-if="createIssueDialog" :create-issue-dialog="createIssueDialog" />
+    <create-task-dialog
+      :create-task-dialog="createTaskDialog"
+      @closeDialog="handleCreateTaskDialog()"
+    />
   </div>
 </template>
 
@@ -28,13 +31,26 @@ export default {
   },
   data() {
     return {
-      createIssueDialog: false,
+      createTaskDialog: false,
     };
+  },
+  methods: {
+    handleCreateTaskDialog() {
+      if (!this.createTaskDialog) {
+        this.createTaskDialog = true;
+        return;
+      }
+      this.createTaskDialog = false;
+      return;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.container {
+  margin: 0 auto;
+}
 .header {
   width: 100%;
 }
