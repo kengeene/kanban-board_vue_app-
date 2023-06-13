@@ -1,13 +1,16 @@
 <template>
-    <div>
+<div>
         <el-row :gutter="20">
-            <el-col :span="rowSpan" class="tasks__column"
+              <el-col :span="rowSpan" class="tasks__column"
              v-for="task, index in tasks" :key="index">
                 <h2 class="tasks__heading">
                     {{ task.title }}
                 </h2>
-                <task-card v-for="ticket, index in task.tickets"
-                :task="ticket" :key="index"/>
+          <draggable v-model="task.tickets" column="tasks" item-key="taskId" group="tasks">
+            <template #item="{element: ticket}">
+                <task-card :task="ticket" :key="index"/>
+            </template>
+          </draggable>
         </el-col>
         </el-row>
     </div>
@@ -20,11 +23,13 @@ import {
 import useStatus from '@/composibles/useStatuses';
 import useTasks from '@/composibles/useTasks';
 import taskCard from '@/components/tasks/task.vue';
+import draggable from 'vuedraggable';
 
 export default {
   name: 'tasks',
   components: {
     taskCard,
+    draggable,
   },
   setup() {
     const { get: getStatuses, statusList: statuses } = useStatus();
