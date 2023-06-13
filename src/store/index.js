@@ -4,15 +4,17 @@ import { createStore } from 'vuex';
 const store = createStore({
   state() {
     return {
+      tasks: [],
     };
   },
   mutations: {
+    setTasks(state, val) {
+      state.tasks = val;
+    },
   },
-  actions: {
-
-  },
+  actions: {},
   getters: {
-
+    getTasks: (state) => state.tasks,
   },
 });
 
