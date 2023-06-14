@@ -6,7 +6,7 @@
       </el-tooltip>
       <div class="task-card__properties">
         <span>
-          {{ task.taskId }}
+          {{ task.id }}
         </span>
         <span></span>
         <span></span>
@@ -43,7 +43,7 @@ export default {
     const handleShowTaskDialog = inject("handleShowTaskDialog");
 
     const showTaskDialog = () => {
-      handleShowTaskDialog(props.task.taskId);
+      handleShowTaskDialog(props.task.id);
     };
 
     onMounted(() => {
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     copyLink() {
-      const url = `${process.env.VUE_APP_BASE_URL}?open=${this.task.taskId}`;
+      const url = `${process.env.VUE_APP_BASE_URL}?open=${this.task.id}`;
       copyToClipboard(url);
     },
   },

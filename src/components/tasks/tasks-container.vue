@@ -14,7 +14,7 @@
         <draggable
           v-model="task.tickets"
           column="tasks"
-          item-key="taskId"
+          item-key="id"
           group="tasks"
           class="tasks__draggable"
           :component-data="getComponentData()"

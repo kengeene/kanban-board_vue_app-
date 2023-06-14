@@ -34,7 +34,7 @@ const useTasks = () => {
         task.taskStatus = updateStatus;
         showNotification(
           "success",
-          `Successfully updated task ${task.taskId}`,
+          `Successfully updated task ${task.id}`,
           `To status '${updateStatus}'`
         );
       }
