@@ -1,36 +1,36 @@
 <template>
-  <el-card class="task-card">
-    <h3 class="task-card__title">
+  <div>
+    <el-card class="task-card">
       <el-tooltip class="box-item" effect="dark" :content="task.title" placement="top-start"
-        >{{ task.title }}
+        ><h3 class="task-card__title" @click="showTaskDialog()">{{ task.title }}</h3>
       </el-tooltip>
-    </h3>
-    <div class="task-card__properties">
-      <span>
-        {{ task.taskId }}
-      </span>
-      <span></span>
-      <span></span>
-      <span>
-        <el-tooltip
-          class="box-item"
-          effect="dark"
-          :content="task.userFullName"
-          placement="top-start"
-        >
-          <img class="task-card__icon" :src="task.userAvatar" />
-        </el-tooltip>
-      </span>
-      <span @click="copyLink()"
-        ><el-icon><Share /></el-icon
-      ></span>
-    </div>
-  </el-card>
+      <div class="task-card__properties">
+        <span>
+          {{ task.taskId }}
+        </span>
+        <span></span>
+        <span></span>
+        <span>
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="task.userFullName"
+            placement="top-start"
+          >
+            <img class="task-card__icon" :src="task.userAvatar" />
+          </el-tooltip>
+        </span>
+        <span @click="copyLink()"
+          ><el-icon><Share /></el-icon
+        ></span>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>
 import { copyToClipboard } from "@/utils/text.js";
-
+import { inject, onMounted } from "vue";
 export default {
   name: "TaskCard",
   props: {
@@ -38,6 +38,21 @@ export default {
       type: Object,
       default: () => {},
     },
+  },
+  setup(props) {
+    const handleShowTaskDialog = inject("handleShowTaskDialog");
+
+    const showTaskDialog = () => {
+      handleShowTaskDialog(props.task.taskId);
+    };
+
+    onMounted(() => {
+      console.log(props.values);
+    });
+
+    return {
+      showTaskDialog,
+    };
   },
   methods: {
     copyLink() {

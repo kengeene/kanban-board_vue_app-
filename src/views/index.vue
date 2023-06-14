@@ -15,6 +15,11 @@
           :create-task-dialog="createTaskDialog"
           @closeDialog="handleCreateTaskDialog()"
         />
+        <show-task-dialog
+          :show-task-dialog="showTaskDialog"
+          :task-id="showTaskDialogId"
+          @closeDialog="handleShowTaskDialog()"
+        />
       </el-col>
     </el-row>
   </div>
@@ -23,28 +28,52 @@
 <script>
 import tasksContainer from "@/components/tasks/tasks-container.vue";
 import searchComponent from "@/components/search/index.vue";
-import createTaskDialog from "@/components/create-task-dialog.vue";
+import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
+import showTaskDialog from "@/components/dialogs/show-task-dialog.vue";
+import { provide, ref } from "vue";
 export default {
   name: "Home",
   components: {
     tasksContainer,
     searchComponent,
     createTaskDialog,
+    showTaskDialog,
   },
-  data() {
-    return {
-      createTaskDialog: false,
-    };
-  },
-  methods: {
-    handleCreateTaskDialog() {
-      if (!this.createTaskDialog) {
-        this.createTaskDialog = true;
+  setup() {
+    const createTaskDialog = ref(false);
+    const showTaskDialog = ref(false);
+    const showTaskDialogId = ref(null);
+
+    const handleShowTaskDialog = (taskId) => {
+      showTaskDialogId.value = taskId;
+      console.log("handleShowTaskDialog", taskId);
+      if (!showTaskDialog.value) {
+        showTaskDialog.value = true;
         return;
       }
-      this.createTaskDialog = false;
+      showTaskDialog.value = false;
       return;
-    },
+    };
+
+    const handleCreateTaskDialog = () => {
+      if (!createTaskDialog.value) {
+        createTaskDialog.value = true;
+        return;
+      }
+      createTaskDialog.value = false;
+      return;
+    };
+
+    provide("handleShowTaskDialog", handleShowTaskDialog);
+    provide("handleCreateTaskDialog", handleCreateTaskDialog);
+
+    return {
+      createTaskDialog,
+      showTaskDialog,
+      showTaskDialogId,
+      handleShowTaskDialog,
+      handleCreateTaskDialog,
+    };
   },
 };
 </script>
