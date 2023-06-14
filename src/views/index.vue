@@ -1,20 +1,22 @@
 <template>
   <div class="container">
-    <div class="header">
-      <el-row :gutter="5">
-        <el-col :span="10">
-          <search-component />
-        </el-col>
-        <el-col :span="10">
-          <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
-        </el-col>
-      </el-row>
-    </div>
-    <tasks-container />
-    <create-task-dialog
-      :create-task-dialog="createTaskDialog"
-      @closeDialog="handleCreateTaskDialog()"
-    />
+    <el-row class="header" :gutter="5">
+      <el-col :span="12">
+        <search-component />
+      </el-col>
+      <el-col :span="12">
+        <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <tasks-container />
+        <create-task-dialog
+          :create-task-dialog="createTaskDialog"
+          @closeDialog="handleCreateTaskDialog()"
+        />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -54,5 +56,7 @@ export default {
 .header {
   width: 100%;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
 }
 </style>

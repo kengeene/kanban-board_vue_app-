@@ -1,7 +1,13 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <el-col v-for="(task, index) in tasks" :key="index" :span="rowSpan" class="tasks__column">
+    <el-row class="tasks__container">
+      <el-col
+        v-for="(task, index) in tasks"
+        :key="index"
+        :span="rowSpan"
+        class="tasks__column"
+        :class="`tasks__col-${index}`"
+      >
         <h2 class="tasks__heading">
           {{ task.title }}
         </h2>
@@ -109,14 +115,37 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 500;
-    color: var(--ds-text-subtlest, #5e6c84);
+    color: #041128;
   }
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
   &__column {
     background-color: #f4f5f7;
+    border-radius: 8px;
+    padding: 0 20px;
   }
 
   &__draggable {
     min-height: 100%;
+  }
+
+  // color palettes from https://www.canva.com/colors/color-palettes/in-the-blue/
+  &__col-0 {
+    background-color: #c4dbe0;
+  }
+  &__col-1 {
+    background-color: #2eb5e0;
+  }
+  &__col-2 {
+    background-color: #00a8a8;
+  }
+  &__col-3 {
+    background-color: #0c6980;
   }
 }
 </style>

@@ -33,6 +33,7 @@ $image-dimensions: 20px;
   margin-bottom: 30px;
   cursor: pointer;
   padding: 15px;
+  border-radius: 8px;
 
   &__properties {
     display: flex;
