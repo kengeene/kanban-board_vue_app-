@@ -21,7 +21,7 @@
           <img class="task-card__icon" :src="task.userAvatar" />
         </el-tooltip>
       </span>
-      <span
+      <span @click="copyLink()"
         ><el-icon><Share /></el-icon
       ></span>
     </div>
@@ -29,12 +29,20 @@
 </template>
 
 <script>
+import { copyToClipboard } from "@/utils/text.js";
+
 export default {
   name: "TaskCard",
   props: {
     task: {
       type: Object,
       default: () => {},
+    },
+  },
+  methods: {
+    copyLink() {
+      const url = `${process.env.VUE_APP_BASE_URL}?open=${this.task.taskId}`;
+      copyToClipboard(url);
     },
   },
 };
