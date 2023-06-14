@@ -16,7 +16,7 @@ module.exports = () => {
   for (let i = 0; i < 10; i++) {
     data.users.push({
       id: faker.string.uuid(),
-      name: faker.person.fullName(),
+      fullName: faker.person.fullName(),
       email: faker.internet.email(),
       avatar: faker.internet.avatar(),
     });
@@ -35,6 +35,7 @@ module.exports = () => {
       taskStatus: faker.helpers.arrayElement(data.taskStatuses.map((x) => x.status)),
       userId: data.users[randomUsersindex].id,
       userAvatar: data.users[randomUsersindex].avatar,
+      userFullName: data.users[randomUsersindex].fullName,
     });
   }
   return data;

@@ -1,13 +1,26 @@
 <template>
   <el-card class="task-card">
-    <h3 class="task-card__title">{{ task.title }}</h3>
+    <h3 class="task-card__title">
+      <el-tooltip class="box-item" effect="dark" :content="task.title" placement="top-start"
+        >{{ task.title }}
+      </el-tooltip>
+    </h3>
     <div class="task-card__properties">
       <span>
         {{ task.taskId }}
       </span>
       <span></span>
       <span></span>
-      <span><img class="task-card__icon" :src="task.userAvatar" /></span>
+      <span>
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          :content="task.userFullName"
+          placement="top-start"
+        >
+          <img class="task-card__icon" :src="task.userAvatar" />
+        </el-tooltip>
+      </span>
       <span
         ><el-icon><Share /></el-icon
       ></span>
