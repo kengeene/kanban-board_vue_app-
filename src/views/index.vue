@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-row class="header" :gutter="5">
+    <el-row class="header">
       <el-col :span="12">
         <search-component />
       </el-col>
@@ -30,7 +30,8 @@ import tasksContainer from "@/components/tasks/tasks-container.vue";
 import searchComponent from "@/components/search/index.vue";
 import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
 import showTaskDialog from "@/components/dialogs/show-task-dialog.vue";
-import { provide, ref } from "vue";
+import { provide, ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 export default {
   name: "Home",
   components: {
@@ -43,10 +44,17 @@ export default {
     const createTaskDialog = ref(false);
     const showTaskDialog = ref(false);
     const showTaskDialogId = ref(null);
+    const route = useRoute();
+
+    onMounted(() => {
+      // Open the dialog if the URL has been shared i.e. it has the task id as a query param
+      if (route.query?.open) {
+        handleShowTaskDialog(route.query.open);
+      }
+    });
 
     const handleShowTaskDialog = (taskId) => {
       showTaskDialogId.value = taskId;
-      console.log("handleShowTaskDialog", taskId);
       if (!showTaskDialog.value) {
         showTaskDialog.value = true;
         return;
@@ -81,6 +89,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   margin: 0 auto;
+  background: darkgrey;
 }
 .header {
   width: 100%;

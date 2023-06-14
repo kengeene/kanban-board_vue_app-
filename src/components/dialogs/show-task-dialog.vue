@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog v-model="displayDialog" title="Task Details Dialog">
+    <el-dialog v-model="displayDialog" :title="`Edit ${form.taskType} ${taskId}`">
       <el-form :model="form">
         <el-form-item label="Ticket Title">
           <el-input v-model="form.title" autocomplete="off"></el-input>
@@ -59,6 +59,11 @@ export default {
     showTaskDialog: {
       type: Boolean,
       default: false,
+    },
+    taskId: {
+      type: String,
+      default: "",
+      required: true,
     },
   },
   setup() {
