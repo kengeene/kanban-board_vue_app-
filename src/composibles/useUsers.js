@@ -1,8 +1,10 @@
 import { getUsers } from "@/api/users";
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import useNotifications from "@/utils/notifications";
 
 const useUsers = () => {
+  const { showNotification } = useNotifications();
   const store = useStore();
   const users = computed(() => store.getters.getUsers);
 
@@ -14,8 +16,8 @@ const useUsers = () => {
     try {
       const { data } = await getUsers();
       store.commit("setUsers", data);
-    } catch (error) {
-      console.warn("Failed to fetch users");
+    } catch (e) {
+      showNotification("error", "Failed fetching taks", e);
     }
   };
 

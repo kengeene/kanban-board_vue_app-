@@ -3,13 +3,18 @@ import { editTask, getTasks, getTaskTypes } from "@/api/tasks";
 import useNotifications from "@/utils/notifications";
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
+import useStatus from "@/composibles/useStatuses";
 
 const useTasks = () => {
-  const taskList = computed(() => store.getters.getTasks);
-  const { showNotification } = useNotifications();
-  const store = useStore();
   const search = ref("");
+
+  const { showNotification } = useNotifications();
+  const { statusList: statuses } = useStatus();
+
+  const store = useStore();
   const taskTypes = computed(() => store.getters.getTaskTypes);
+  const sortedTasks = computed(() => store.getters.getSortedTasks);
+  const taskList = computed(() => store.getters.getTasks);
 
   onMounted(async () => {
     await getAllTaskTypes();
@@ -19,7 +24,14 @@ const useTasks = () => {
     try {
       const { data } = await getTasks();
       store.commit("setTasks", data);
-      taskList.value = data;
+      const sortedTasks = [];
+      statuses.value.forEach((status) => {
+        sortedTasks.push({
+          title: status.status,
+          tickets: taskList.value.filter((task) => task.taskStatus === status.status),
+        });
+      });
+      store.commit("setSortedTasks", sortedTasks);
     } catch (e) {
       showNotification("error", "Failed fetching taks", e);
     }
@@ -76,6 +88,7 @@ const useTasks = () => {
     taskList,
     search,
     updateTaskStatuses,
+    sortedTasks,
   };
 };
 

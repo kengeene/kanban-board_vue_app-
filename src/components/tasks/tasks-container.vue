@@ -44,28 +44,17 @@ export default {
   },
   setup() {
     const { get: getStatuses, statusList: statuses } = useStatus();
-    const { get: getTasks, taskList, updateTaskStatuses } = useTasks();
-    const tasks = ref([]);
+    const { get: getTasks, taskList, updateTaskStatuses, sortedTasks: tasks } = useTasks();
 
     onMounted(async () => {
       await getStatuses();
       await getTasks();
-
-      statuses.value.forEach((status) => {
-        tasks.value.push({
-          title: status.status,
-          tickets: taskList.value.filter((task) => task.taskStatus === status.status),
-        });
-      });
     });
+
     const taskCount = computed(() => tasks.value.length);
     const rowSpan = ref(5);
 
     const activeNames = ref(null);
-
-    const handleChange = () => {
-      // to-do: add logic for handling change
-    };
 
     const updateModel = (taskList, currentStatus) => {
       updateTaskStatuses(taskList, currentStatus);
@@ -78,7 +67,7 @@ export default {
     const getComponentData = () => {
       // Can handle different changes
       return {
-        onChange: handleChange,
+        onChange: null,
         onInput: inputChanged,
         wrap: true,
         value: "",

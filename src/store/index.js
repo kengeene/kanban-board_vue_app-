@@ -8,6 +8,7 @@ const store = createStore({
       statuses: [],
       taskTypes: [],
       users: [],
+      sortedTasks: [],
     };
   },
   mutations: {
@@ -23,6 +24,9 @@ const store = createStore({
     setUsers(state, val) {
       state.users = val;
     },
+    setSortedTasks(state, val) {
+      state.sortedTasks = val;
+    },
   },
   actions: {},
   getters: {
@@ -30,6 +34,7 @@ const store = createStore({
     getStatuses: (state) => state.statuses,
     getTaskTypes: (state) => state.taskTypes,
     getUsers: (state) => state.users,
+    getSortedTasks: (state) => state.sortedTasks,
   },
 });
 
