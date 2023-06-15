@@ -1,4 +1,4 @@
-$profile-icon-dimensions: 20px;
+$profile-icon-dimensions: 30px;
 
 .images{
     &__profile-avi{
@@ -7,5 +7,10 @@ $profile-icon-dimensions: 20px;
         border-radius: $profile-icon-dimensions;
         background-color: grey;
         color: black;
+
+        &--details-card{
+            display: flex;
+            margin-left: 15px;
+        }
     }
 }

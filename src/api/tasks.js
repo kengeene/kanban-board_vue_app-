@@ -15,3 +15,11 @@ export async function getTaskTypes(data) {
     data,
   });
 }
+
+export async function editTask(payload) {
+  return request({
+    url: `http://localhost:3000/tasks/${payload.id}`,
+    method: "put",
+    data: payload,
+  });
+}

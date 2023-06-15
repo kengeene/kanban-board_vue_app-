@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog v-model="displayDialog" :title="`Edit ${form.taskType} ${taskId}`">
-      <el-form :model="form">
+      <el-form v-loading="loading" :model="form">
         <el-form-item label="Ticket Title">
           <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
@@ -27,31 +27,41 @@
         </el-form-item>
         <el-form-item label="Assign the ticket">
           <el-select
-            v-model="form.userUid"
+            v-model="form.selectedUser"
             placeholder="Please select a user to assign the ticket to"
+            value-key="userId"
           >
             <el-option
-              v-for="(user, index) in users"
+              v-for="(user, index) in userList"
               :key="index"
-              :label="user.name"
-              value="user"
-            ></el-option>
+              :value="user"
+              :label="user.userFullName"
+            >
+            </el-option>
           </el-select>
+          <span v-if="form.selectedUser"
+            ><img
+              :src="form.selectedUser.userAvatar"
+              class="images__profile-avi images__profile-avi--details-card"
+            />
+          </span>
         </el-form-item>
+        <span>
+          <el-button @click="closeDialog()">Cancel</el-button>
+          <el-button type="primary" @click="submitForm()">Confirm</el-button>
+        </span>
       </el-form>
-      <span class="dialog-footer">
-        <el-button @click="closeDialog()">Cancel</el-button>
-        <el-button type="primary" @click="displayDialog = false">Confirm</el-button>
-      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import useStatuses from "@/composibles/useStatuses";
 import useTasks from "@/composibles/useTasks";
 import useUsers from "@/composibles/useUsers";
+import { useStore } from "vuex";
+import useNotifications from "@/utils/notifications";
 
 export default {
   name: "ShowTaskDialog",
@@ -66,43 +76,96 @@ export default {
       required: true,
     },
   },
-  setup() {
-    const form = reactive({
-      title: "",
-      taskType: "",
+  setup(props, { emit }) {
+    const displayDialog = ref(false);
+
+    const form = ref({
+      id: "",
       taskStatus: "",
-      userUid: "",
+      taskType: "",
+      title: "",
+      userAvatar: "",
+      userFullName: "",
+      userId: "",
+    });
+    const loading = ref(false);
+
+    const { showNotification } = useNotifications();
+    const { statusList: statuses } = useStatuses();
+    const { taskTypes, edit: editTask } = useTasks();
+    const { users } = useUsers();
+    const store = useStore();
+
+    const taskDetails = computed(
+      () =>
+        store.getters.getTasks.filter((x) => {
+          return x.id === props.taskId;
+        })[0]
+    );
+
+    watch(
+      () => props.showTaskDialog,
+      (value) => {
+        displayDialog.value = value;
+      },
+      {
+        immediate: true,
+      }
+    );
+
+    const closeDialog = () => {
+      displayDialog.value = false;
+      emit("closeDialog");
+    };
+
+    const submitForm = async () => {
+      loading.value = true;
+      try {
+        const payload = {
+          ...form.value,
+          ...form.value.selectedUser,
+        };
+
+        delete payload.selectedUser;
+        await editTask(payload);
+        showNotification("success", `Successfully edited ${payload.id}`);
+      } catch (e) {
+        showNotification("error", "Failed editing task", e);
+      } finally {
+        loading.value = false;
+        closeDialog();
+      }
+    };
+
+    const userList = computed(() => {
+      return users.value.map((x) => ({
+        userAvatar: x.avatar,
+        userFullName: x.fullName,
+        userId: x.id,
+      }));
     });
 
-    const { statusList: statuses } = useStatuses();
-    const { taskTypes } = useTasks();
-    const { users } = useUsers();
+    onMounted(() => {
+      form.value = {
+        ...taskDetails.value,
+        selectedUser: {
+          userAvatar: taskDetails.value.userAvatar,
+          userFullName: taskDetails.value.userFullName,
+          userId: taskDetails.value.userId,
+        },
+      };
+    });
 
     return {
+      closeDialog,
+      displayDialog,
+      loading,
+      submitForm,
       form,
       statuses,
       taskTypes,
-      users,
+      userList,
     };
-  },
-  data() {
-    return {
-      displayDialog: false,
-    };
-  },
-  watch: {
-    showTaskDialog: {
-      handler: function (value) {
-        this.displayDialog = value;
-      },
-      immediate: true,
-    },
-  },
-  methods: {
-    closeDialog() {
-      this.displayDialog = false;
-      this.$emit("closeDialog");
-    },
   },
 };
 </script>

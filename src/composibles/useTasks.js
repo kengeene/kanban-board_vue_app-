@@ -1,10 +1,11 @@
-import { getTasks, getTaskTypes } from "@/api/tasks";
+/* eslint-disable no-async-promise-executor */
+import { editTask, getTasks, getTaskTypes } from "@/api/tasks";
 import useNotifications from "@/utils/notifications";
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 
 const useTasks = () => {
-  const taskList = ref([]);
+  const taskList = computed(() => store.getters.getTasks);
   const { showNotification } = useNotifications();
   const store = useStore();
   const search = ref("");
@@ -24,7 +25,7 @@ const useTasks = () => {
     }
   };
 
-  const updateTaskStatuses = (tasksToUpdate, updateStatus) => {
+  const updateTaskStatuses = async (tasksToUpdate, updateStatus) => {
     try {
       const filteredTasks = tasksToUpdate.filter((x) => {
         return x.taskStatus !== updateStatus;
@@ -32,6 +33,7 @@ const useTasks = () => {
 
       for (const task of filteredTasks) {
         task.taskStatus = updateStatus;
+        await editTask(task);
         showNotification(
           "success",
           `Successfully updated task ${task.id}`,
@@ -52,7 +54,23 @@ const useTasks = () => {
     }
   };
 
+  const edit = async (payload) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { status } = await editTask(payload);
+        if (status == 200) {
+          await get();
+          resolve();
+        }
+      } catch (e) {
+        showNotification("error", "Failed editing task", e);
+        reject(e);
+      }
+    });
+  };
+
   return {
+    edit,
     taskTypes,
     get,
     taskList,

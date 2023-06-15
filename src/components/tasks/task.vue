@@ -30,7 +30,7 @@
 
 <script>
 import { copyToClipboard } from "@/utils/text.js";
-import { inject, onMounted } from "vue";
+import { inject } from "vue";
 export default {
   name: "TaskCard",
   props: {
@@ -45,10 +45,6 @@ export default {
     const showTaskDialog = () => {
       handleShowTaskDialog(props.task.id);
     };
-
-    onMounted(() => {
-      console.log(props.values);
-    });
 
     return {
       showTaskDialog,

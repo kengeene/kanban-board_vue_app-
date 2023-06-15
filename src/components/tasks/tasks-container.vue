@@ -93,6 +93,7 @@ export default {
       taskCount,
       tasks,
       statuses,
+      taskList,
     };
   },
 };

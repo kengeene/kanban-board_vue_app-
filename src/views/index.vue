@@ -16,6 +16,7 @@
           @closeDialog="handleCreateTaskDialog()"
         />
         <show-task-dialog
+          v-if="showTaskDialog"
           :show-task-dialog="showTaskDialog"
           :task-id="showTaskDialogId"
           @closeDialog="handleShowTaskDialog()"
