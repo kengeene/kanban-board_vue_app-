@@ -92,7 +92,7 @@ export default {
 
     const { showNotification } = useNotifications();
     const { statusList: statuses } = useStatuses();
-    const { taskTypes, edit: editTask } = useTasks();
+    const { taskTypes, edit: editTask, get: getTasks } = useTasks();
     const { users } = useUsers();
     const store = useStore();
 
@@ -145,7 +145,17 @@ export default {
       }));
     });
 
-    onMounted(() => {
+    watch(
+      () => taskDetails.value,
+      () => {
+        if (taskDetails.value) {
+          preFillForm();
+        }
+      },
+      { immediate: true }
+    );
+
+    const preFillForm = () => {
       form.value = {
         ...taskDetails.value,
         selectedUser: {
@@ -154,6 +164,10 @@ export default {
           userId: taskDetails.value.userId,
         },
       };
+    };
+
+    onMounted(async () => {
+      !taskDetails.value ?? (await getTasks());
     });
 
     return {
