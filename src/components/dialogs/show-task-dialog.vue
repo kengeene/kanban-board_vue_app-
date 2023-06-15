@@ -145,16 +145,6 @@ export default {
       }));
     });
 
-    watch(
-      () => taskDetails.value,
-      () => {
-        if (taskDetails.value) {
-          preFillForm();
-        }
-      },
-      { immediate: true }
-    );
-
     const preFillForm = () => {
       form.value = {
         ...taskDetails.value,
@@ -165,6 +155,16 @@ export default {
         },
       };
     };
+
+    watch(
+      () => taskDetails.value,
+      () => {
+        if (taskDetails.value) {
+          preFillForm();
+        }
+      },
+      { immediate: true }
+    );
 
     onMounted(async () => {
       !taskDetails.value ?? (await getTasks());
