@@ -1,0 +1,11 @@
+$profile-icon-dimensions: 20px;
+
+.images{
+    &__profile-avi{
+        height: $profile-icon-dimensions;
+        width: $profile-icon-dimensions;
+        border-radius: $profile-icon-dimensions;
+        background-color: grey;
+        color: black;
+    }
+}
