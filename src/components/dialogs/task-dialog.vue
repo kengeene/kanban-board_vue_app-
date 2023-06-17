@@ -22,6 +22,7 @@
               :key="index"
               :label="task"
               :value="task"
+              :data-test="task"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -36,6 +37,7 @@
               :key="index"
               :label="status.status"
               :value="status.status"
+              :data-test="status.status"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -51,6 +53,7 @@
               :key="index"
               :value="user"
               :label="user.userFullName"
+              :data-test="`user-${index}`"
             >
             </el-option>
           </el-select>

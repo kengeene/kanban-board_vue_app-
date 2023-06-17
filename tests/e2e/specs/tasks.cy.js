@@ -19,7 +19,6 @@ describe("My First Test", () => {
     cy.visit("/");
     cy.getByData("task-IJT-566-title").click();
     cy.getByData("dialog-title").should("contain", "Edit Bug IJT-566");
-
     cy.getByData("title-field").clear();
     cy.getByData("title-field").type("This is a test");
     cy.getByData("confirmButton").click();
@@ -42,5 +41,35 @@ describe("My First Test", () => {
   it("Should be able to open a task using a shared link", () => {
     cy.visit("/?open=IJT-566");
     cy.getByData("dialog-title").should("contain", "Edit Bug IJT-566");
+  });
+
+  it("should be able to create a task", () => {
+    cy.visit("/");
+    cy.getByData("create-task-button").click();
+    cy.getByData("user-profile-avi").should("not.exist");
+    cy.getByData("title-field").type("Finish working on the Kanban app");
+    cy.getByData("task-type-dropdown").click();
+    cy.getByData("Bug").click();
+    cy.getByData("task-status-dropdown").click();
+    cy.getByData("Pending").click();
+    cy.getByData("user-dropdown").click();
+    cy.getByData("user-0").click();
+    cy.getByData("user-profile-avi").should("exist");
+    cy.getByData("confirmButton").click();
+    cy.wait("@createTasks").then((interception) => {
+      const taskId = interception.request.body.id;
+      assert.deepEqual(interception.request.body, {
+        id: taskId,
+        taskStatus: "Pending",
+        taskType: "Bug",
+        title: "Finish working on the Kanban app",
+        userId: "4907477f-6545-4e99-bfc3-340940202078",
+        userFullName: "Sylvester Purdy II",
+        userAvatar:
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/365.jpg",
+      });
+      cy.get(".notification").should("contain.text", `Successfully created ${taskId}`);
+      cy.getByData("dialog-title").should("not.exist");
+    });
   });
 });

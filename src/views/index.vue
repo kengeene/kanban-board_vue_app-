@@ -2,7 +2,13 @@
   <div class="container">
     <el-row class="header">
       <el-col :span="12">
-        <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
+        <el-button
+          type="primary"
+          round
+          data-test="create-task-button"
+          @click="handleCreateTaskDialog()"
+          >Create Task</el-button
+        >
       </el-col>
     </el-row>
     <el-row>

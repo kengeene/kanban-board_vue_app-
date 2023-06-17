@@ -51,7 +51,7 @@ Cypress.Commands.add("appStubs", () => {
     body: tasks.tasks,
     times: 1,
   }).as("tasks");
-  cy.intercept("**/users", {
+  cy.intercept("GET", "**/users", {
     statusCode: 200,
     body: users.users,
     times: 1,
@@ -59,4 +59,7 @@ Cypress.Commands.add("appStubs", () => {
   cy.intercept("PUT", "**/tasks/**", {
     statusCode: 200,
   }).as("editedTask");
+  cy.intercept("POST", "**/tasks", {
+    statusCode: 201,
+  }).as("createTasks");
 });
