@@ -8,15 +8,12 @@
     <el-row>
       <el-col :span="24">
         <tasks-container />
-        <create-task-dialog
-          :create-task-dialog="createTaskDialog"
-          @closeDialog="handleCreateTaskDialog()"
-        />
         <show-task-dialog
-          v-if="showTaskDialog"
-          :show-task-dialog="showTaskDialog"
+          v-if="showTaskDialog || createTaskDialog"
+          :show-task-dialog="showTaskDialog || createTaskDialog"
           :task-id="showTaskDialogId"
-          @closeDialog="handleShowTaskDialog()"
+          :is-edit="!createTaskDialog"
+          @closeDialog="closeDialog()"
         />
       </el-col>
     </el-row>
@@ -25,7 +22,7 @@
 
 <script>
 import tasksContainer from "@/components/tasks/tasks-container.vue";
-import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
+// import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
 import showTaskDialog from "@/components/dialogs/show-task-dialog.vue";
 import { provide, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -33,7 +30,7 @@ export default {
   name: "Home",
   components: {
     tasksContainer,
-    createTaskDialog,
+    // createTaskDialog,
     showTaskDialog,
   },
   setup() {
@@ -51,27 +48,24 @@ export default {
 
     const handleShowTaskDialog = (taskId) => {
       showTaskDialogId.value = taskId;
-      if (!showTaskDialog.value) {
-        showTaskDialog.value = true;
-        return;
-      }
-      showTaskDialog.value = false;
-      return;
+      showTaskDialog.value = true;
     };
 
     const handleCreateTaskDialog = () => {
-      if (!createTaskDialog.value) {
-        createTaskDialog.value = true;
-        return;
-      }
+      createTaskDialog.value = true;
+    };
+
+    const closeDialog = () => {
+      showTaskDialogId.value = "";
+      showTaskDialog.value = false;
       createTaskDialog.value = false;
-      return;
     };
 
     provide("handleShowTaskDialog", handleShowTaskDialog);
     provide("handleCreateTaskDialog", handleCreateTaskDialog);
 
     return {
+      closeDialog,
       createTaskDialog,
       showTaskDialog,
       showTaskDialogId,

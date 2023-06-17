@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+import { generateProjectId } from "@/utils/text.js";
 
 module.exports = () => {
   const data = {
@@ -29,7 +30,7 @@ module.exports = () => {
     data.tasks.push({
       title: faker.lorem.words(5),
       taskType: faker.helpers.arrayElement(data.taskTypes),
-      id: `${faker.string.alphanumeric({ casing: "upper", length: 3 })}-${faker.string.numeric(3)}`,
+      id: generateProjectId(),
       taskStatus: faker.helpers.arrayElement(data.taskStatuses.map((x) => x.status)),
       userId: data.users[randomUsersindex].id,
       userAvatar: data.users[randomUsersindex].avatar,

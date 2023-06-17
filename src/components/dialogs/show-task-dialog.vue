@@ -2,8 +2,10 @@
   <div>
     <el-dialog
       v-model="displayDialog"
-      :title="`Edit ${form.taskType} ${taskId}`"
+      :title="isEdit ? `Edit ${form.taskType} ${taskId}` : 'Create a task'"
       data-test="dialog-title"
+      :destroy-on-close="true"
+      :before-close="closeDialog"
     >
       <el-form v-loading="loading" :model="form">
         <el-form-item label="Ticket Title">
@@ -52,7 +54,7 @@
             >
             </el-option>
           </el-select>
-          <span v-if="form.selectedUser"
+          <span v-if="!!form.selectedUser.userId"
             ><img
               :src="form.selectedUser.userAvatar"
               class="images__profile-avi images__profile-avi--details-card"
@@ -77,7 +79,6 @@ import useStatuses from "@/composibles/useStatuses";
 import useTasks from "@/composibles/useTasks";
 import useUsers from "@/composibles/useUsers";
 import { useStore } from "vuex";
-import useNotifications from "@/utils/notifications";
 
 export default {
   name: "ShowTaskDialog",
@@ -89,7 +90,10 @@ export default {
     taskId: {
       type: String,
       default: "",
-      required: true,
+    },
+    isEdit: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {
@@ -103,12 +107,16 @@ export default {
       userAvatar: "",
       userFullName: "",
       userId: "",
+      selectedUser: {
+        userAvatar: "",
+        userFullName: "",
+        userId: "",
+      },
     });
     const loading = ref(false);
 
-    const { showNotification } = useNotifications();
     const { statusList: statuses } = useStatuses();
-    const { taskTypes, edit: editTask, get: getTasks } = useTasks();
+    const { taskTypes, edit: editTask, get: getTasks, create: createTask } = useTasks();
     const { users } = useUsers();
     const store = useStore();
 
@@ -143,10 +151,10 @@ export default {
         };
 
         delete payload.selectedUser;
-        await editTask(payload);
-        showNotification("success", `Successfully edited ${payload.id}`);
+
+        props.isEdit ? await editTask(payload) : await createTask(payload);
       } catch (e) {
-        showNotification("error", "Failed editing task", e);
+        return e;
       } finally {
         loading.value = false;
         closeDialog();
@@ -175,7 +183,7 @@ export default {
     watch(
       () => taskDetails.value,
       () => {
-        if (taskDetails.value) {
+        if (taskDetails.value && props.isEdit) {
           preFillForm();
         }
       },

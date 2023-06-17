@@ -1,9 +1,10 @@
 /* eslint-disable no-async-promise-executor */
-import { editTask, getTasks, getTaskTypes } from "@/api/tasks";
+import { createTask, editTask, getTasks, getTaskTypes } from "@/api/tasks";
 import useNotifications from "@/utils/notifications";
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import useStatus from "@/composibles/useStatuses";
+import { generateProjectId } from "@/utils/text.js";
 
 const useTasks = () => {
   const search = ref("");
@@ -66,12 +67,30 @@ const useTasks = () => {
     }
   };
 
+  const create = async (payload) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        payload.id = generateProjectId();
+        const { status } = await createTask(payload);
+        if (status == 201) {
+          await get();
+          showNotification("success", `Successfully created ${payload.id}`);
+          resolve();
+        }
+      } catch (e) {
+        showNotification("error", "Failed creating task", e);
+        reject(e);
+      }
+    });
+  };
+
   const edit = async (payload) => {
     return new Promise(async (resolve, reject) => {
       try {
         const { status } = await editTask(payload);
         if (status == 200) {
           await get();
+          showNotification("success", `Successfully edited ${payload.id}`);
           resolve();
         }
       } catch (e) {
@@ -82,6 +101,7 @@ const useTasks = () => {
   };
 
   return {
+    create,
     edit,
     taskTypes,
     get,
