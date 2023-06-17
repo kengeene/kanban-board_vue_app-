@@ -12,6 +12,10 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        env:
+            VUE_APP_BASE_URL: http://localhost:8080/
+            # Doesnt matter because tests shouldn't hit the API server
+            VUE_APP_API_BASE_URL: http://localhost:3030/
         with:
           start: npm run serve
           wait-on: http://localhost:8080/
