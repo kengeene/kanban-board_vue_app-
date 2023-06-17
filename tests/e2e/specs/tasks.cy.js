@@ -38,4 +38,9 @@ describe("My First Test", () => {
     cy.getByData("dialog-title").should("not.exist");
     cy.get(".notification").should("contain.text", "Successfully edited IJT-566");
   });
+
+  it("Should be able to open a task using a shared link", () => {
+    cy.visit("/?open=IJT-566");
+    cy.getByData("dialog-title").should("contain", "Edit Bug IJT-566");
+  });
 });
