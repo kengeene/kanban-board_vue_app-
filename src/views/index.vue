@@ -8,7 +8,7 @@
     <el-row>
       <el-col :span="24">
         <tasks-container />
-        <show-task-dialog
+        <task-dialog
           v-if="showTaskDialog || createTaskDialog"
           :show-task-dialog="showTaskDialog || createTaskDialog"
           :task-id="showTaskDialogId"
@@ -22,16 +22,14 @@
 
 <script>
 import tasksContainer from "@/components/tasks/tasks-container.vue";
-// import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
-import showTaskDialog from "@/components/dialogs/show-task-dialog.vue";
+import taskDialog from "@/components/dialogs/task-dialog.vue";
 import { provide, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 export default {
   name: "Home",
   components: {
     tasksContainer,
-    // createTaskDialog,
-    showTaskDialog,
+    taskDialog,
   },
   setup() {
     const createTaskDialog = ref(false);
