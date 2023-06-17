@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "json-server src/respository/index.js & vue-cli-service serve",
+    "build": "json-server src/respository/index.js & vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
@@ -23,6 +23,7 @@
     "core-js": "^3.6.5",
     "element-plus": "^2.3.6",
     "jest": "^27.5.1",
+    "json-server": "^0.17.3",
     "sass": "^1.63.3",
     "sass-loader": "^13.3.2",
     "vue": "^3.2.36",
