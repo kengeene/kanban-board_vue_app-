@@ -2,7 +2,7 @@ import request from "@/utils/requests";
 
 export async function getStatuses(data) {
   return request({
-    url: "http://localhost:3000/taskStatuses",
+    url: `${process.env.VUE_APP_API_BASE_URL}taskStatuses`,
     method: "get",
     data,
   });

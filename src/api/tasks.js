@@ -2,7 +2,7 @@ import request from "@/utils/requests";
 
 export async function createTask(payload) {
   return request({
-    url: `http://localhost:3000/tasks`,
+    url: `${process.env.VUE_APP_API_BASE_URL}tasks`,
     method: "post",
     data: payload,
   });
@@ -10,7 +10,7 @@ export async function createTask(payload) {
 
 export async function editTask(payload) {
   return request({
-    url: `http://localhost:3000/tasks/${payload.id}`,
+    url: `${process.env.VUE_APP_API_BASE_URL}tasks/${payload.id}`,
     method: "put",
     data: payload,
   });
@@ -18,7 +18,7 @@ export async function editTask(payload) {
 
 export async function getTasks(data) {
   return request({
-    url: "http://localhost:3000/tasks",
+    url: `${process.env.VUE_APP_API_BASE_URL}tasks`,
     method: "get",
     data,
   });
@@ -26,7 +26,7 @@ export async function getTasks(data) {
 
 export async function getTaskTypes(data) {
   return request({
-    url: "http://localhost:3000/taskTypes",
+    url: `${process.env.VUE_APP_API_BASE_URL}taskTypes`,
     method: "get",
     data,
   });
