@@ -85,7 +85,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   margin: 0 auto;
-  background: darkgrey;
 }
 .header {
   width: 100%;
