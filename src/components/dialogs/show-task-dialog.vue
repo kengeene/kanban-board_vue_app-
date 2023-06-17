@@ -1,12 +1,20 @@
 <template>
   <div>
-    <el-dialog v-model="displayDialog" :title="`Edit ${form.taskType} ${taskId}`">
+    <el-dialog
+      v-model="displayDialog"
+      :title="`Edit ${form.taskType} ${taskId}`"
+      data-test="dialog-title"
+    >
       <el-form v-loading="loading" :model="form">
         <el-form-item label="Ticket Title">
-          <el-input v-model="form.title" autocomplete="off"></el-input>
+          <el-input v-model="form.title" autocomplete="off" data-test="title-field"></el-input>
         </el-form-item>
         <el-form-item label="Task Type">
-          <el-select v-model="form.taskType" placeholder="Please select an task type">
+          <el-select
+            v-model="form.taskType"
+            data-test="task-type-dropdown"
+            placeholder="Please select an task type"
+          >
             <el-option
               v-for="(task, index) in taskTypes"
               :key="index"
@@ -16,7 +24,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Choose the task status">
-          <el-select v-model="form.taskStatus" placeholder="Select a status">
+          <el-select
+            v-model="form.taskStatus"
+            data-test="task-status-dropdown"
+            placeholder="Select a status"
+          >
             <el-option
               v-for="(status, index) in statuses"
               :key="index"
@@ -28,6 +40,7 @@
         <el-form-item label="Assign the ticket">
           <el-select
             v-model="form.selectedUser"
+            data-test="user-dropdown"
             placeholder="Please select a user to assign the ticket to"
             value-key="userId"
           >
@@ -43,12 +56,15 @@
             ><img
               :src="form.selectedUser.userAvatar"
               class="images__profile-avi images__profile-avi--details-card"
+              data-test="user-profile-avi"
             />
           </span>
         </el-form-item>
         <span>
           <el-button @click="closeDialog()">Cancel</el-button>
-          <el-button type="primary" @click="submitForm()">Confirm</el-button>
+          <el-button type="primary" data-test="confirmButton" @click="submitForm()"
+            >Confirm</el-button
+          >
         </span>
       </el-form>
     </el-dialog>

@@ -2,7 +2,13 @@
   <div>
     <el-card class="task-card" :data-test="`task-${task.id}`" :class="`task-${task.id}`">
       <el-tooltip class="box-item" effect="dark" :content="task.title" placement="top-start"
-        ><h3 class="task-card__title" @click="showTaskDialog()">{{ task.title }}</h3>
+        ><h3
+          class="task-card__title"
+          :data-test="`task-${task.id}-title`"
+          @click="showTaskDialog()"
+        >
+          {{ task.title }}
+        </h3>
       </el-tooltip>
       <div class="task-card__properties">
         <span>
