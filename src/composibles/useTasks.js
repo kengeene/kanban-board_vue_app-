@@ -33,7 +33,7 @@ const useTasks = () => {
       });
       store.commit("setSortedTasks", sortedTasks);
     } catch (e) {
-      showNotification("error", "Failed fetching taks", e);
+      showNotification("error", "Failed fetching tasks", e);
     }
   };
 
