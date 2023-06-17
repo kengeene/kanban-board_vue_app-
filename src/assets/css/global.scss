@@ -1,5 +1,9 @@
 $profile-icon-dimensions: 30px;
 
+body{
+    margin: 0;
+}
+
 .images{
     &__profile-avi{
         height: $profile-icon-dimensions;
