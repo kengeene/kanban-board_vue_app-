@@ -2,9 +2,6 @@
   <div class="container">
     <el-row class="header">
       <el-col :span="12">
-        <search-component />
-      </el-col>
-      <el-col :span="12">
         <el-button type="primary" round @click="handleCreateTaskDialog()">Create Issue</el-button>
       </el-col>
     </el-row>
@@ -28,7 +25,6 @@
 
 <script>
 import tasksContainer from "@/components/tasks/tasks-container.vue";
-import searchComponent from "@/components/search/index.vue";
 import createTaskDialog from "@/components/dialogs/create-task-dialog.vue";
 import showTaskDialog from "@/components/dialogs/show-task-dialog.vue";
 import { provide, ref, onMounted } from "vue";
@@ -37,7 +33,6 @@ export default {
   name: "Home",
   components: {
     tasksContainer,
-    searchComponent,
     createTaskDialog,
     showTaskDialog,
   },
