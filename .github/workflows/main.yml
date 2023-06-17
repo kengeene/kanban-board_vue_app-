@@ -3,7 +3,7 @@ name: Cypress Tests
 on: push
 
 jobs:
-  Jest:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -11,7 +11,7 @@ jobs:
         run: |
           npm install
           npm run test:unit
-  cypress-run:
+  e2e-tests:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
