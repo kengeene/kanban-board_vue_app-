@@ -123,7 +123,9 @@ export default {
   }
 
   &__draggable {
-    min-height: 100%;
+    max-height: 80vh;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 
   // color palettes from https://www.canva.com/colors/color-palettes/in-the-blue/
