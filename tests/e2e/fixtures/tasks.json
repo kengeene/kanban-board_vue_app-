@@ -1,0 +1,158 @@
+{
+    "taskTypes": ["Bug", "Feature"],
+    "taskStatuses": [
+      {
+        "id": 1,
+        "status": "Pending"
+      },
+      {
+        "id": 2,
+        "status": "In Progress"
+      },
+      {
+        "id": 3,
+        "status": "In QA"
+      },
+      {
+        "id": 4,
+        "status": "Done"
+      }
+    ],
+    "tasks":[
+      {
+        "title": "ratione necessitatibus deleniti officiis quaerat",
+        "taskType": "Bug",
+        "id": "4GE-532",
+        "taskStatus": "In QA",
+        "userId": "088c9422-ecf9-44b3-b379-52aee01d9a17",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/28.jpg",
+        "userFullName": "Isabel Schulist"
+      },
+      {
+        "title": "harum dolores illo ullam laudantium",
+        "taskType": "Bug",
+        "id": "IJT-566",
+        "taskStatus": "Pending",
+        "userId": "d83f4f56-3f79-48f4-9bdc-cd16c07c4e45",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/138.jpg",
+        "userFullName": "Essie Roberts"
+      },
+      {
+        "title": "odit ratione commodi nesciunt omnis",
+        "taskType": "Feature",
+        "id": "RVF-583",
+        "taskStatus": "Pending",
+        "userId": "c26cb5b6-558f-4ec7-9fda-84a3e7a17088",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/107.jpg",
+        "userFullName": "Rosie Stracke MD"
+      },
+      {
+        "title": "velit dolorem nisi nisi quibusdam",
+        "taskType": "Bug",
+        "id": "3W0-414",
+        "taskStatus": "In QA",
+        "userId": "4907477f-6545-4e99-bfc3-340940202078",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/365.jpg",
+        "userFullName": "Sylvester Purdy II"
+      },
+      {
+        "title": "deleniti earum consequuntur aperiam officia",
+        "taskType": "Bug",
+        "id": "EQ8-485",
+        "taskStatus": "In Progress",
+        "userId": "65572691-1301-450c-b261-dd6458f0eee1",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/538.jpg",
+        "userFullName": "Stewart Keebler"
+      },
+      {
+        "title": "cumque harum praesentium nobis omnis",
+        "taskType": "Feature",
+        "id": "EA6-390",
+        "taskStatus": "In QA",
+        "userId": "4907477f-6545-4e99-bfc3-340940202078",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/365.jpg",
+        "userFullName": "Sylvester Purdy II"
+      },
+      {
+        "title": "tempore sequi quo totam neque",
+        "taskType": "Feature",
+        "id": "FBM-103",
+        "taskStatus": "In QA",
+        "userId": "7cc20d27-ae56-4252-9d75-0edc91ca7b33",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/877.jpg",
+        "userFullName": "Dorothy Adams"
+      },
+      {
+        "title": "aliquid veniam quae rem consectetur",
+        "taskType": "Bug",
+        "id": "770-871",
+        "taskStatus": "In Progress",
+        "userId": "107b2de8-200b-4f1d-a6bd-4fd48be965a4",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/979.jpg",
+        "userFullName": "Reginald Fay"
+      },
+      {
+        "title": "nostrum accusamus odio accusantium fugit",
+        "taskType": "Bug",
+        "id": "7LB-152",
+        "taskStatus": "In Progress",
+        "userId": "c26cb5b6-558f-4ec7-9fda-84a3e7a17088",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/107.jpg",
+        "userFullName": "Rosie Stracke MD"
+      },
+      {
+        "title": "fugit eius a deserunt recusandae",
+        "taskType": "Feature",
+        "id": "Z1X-801",
+        "taskStatus": "In QA",
+        "userId": "20dfa918-22e4-4a44-b05a-a1ca27796869",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/670.jpg",
+        "userFullName": "Angelina Orn"
+      },
+      {
+        "title": "ab voluptatum pariatur perferendis nostrum",
+        "taskType": "Bug",
+        "id": "PMI-131",
+        "taskStatus": "Pending",
+        "userId": "e87cafd0-9afe-45a4-bf70-fa6124406cf2",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/164.jpg",
+        "userFullName": "Ruth Kuphal"
+      },
+      {
+        "title": "natus adipisci perferendis incidunt eos",
+        "taskType": "Bug",
+        "id": "R5R-830",
+        "taskStatus": "In QA",
+        "userId": "c26cb5b6-558f-4ec7-9fda-84a3e7a17088",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/107.jpg",
+        "userFullName": "Rosie Stracke MD"
+      },
+      {
+        "title": "ullam cum ratione ipsam eos",
+        "taskType": "Feature",
+        "id": "3W6-096",
+        "taskStatus": "In QA",
+        "userId": "c26cb5b6-558f-4ec7-9fda-84a3e7a17088",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/107.jpg",
+        "userFullName": "Rosie Stracke MD"
+      },
+      {
+        "title": "dolorem reiciendis omnis minus ullam",
+        "taskType": "Bug",
+        "id": "I1P-849",
+        "taskStatus": "Done",
+        "userId": "107b2de8-200b-4f1d-a6bd-4fd48be965a4",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/979.jpg",
+        "userFullName": "Reginald Fay"
+      },
+      {
+        "title": "dolores itaque eius blanditiis modi",
+        "taskType": "Bug",
+        "id": "ZDJ-138",
+        "taskStatus": "Done",
+        "userId": "e87cafd0-9afe-45a4-bf70-fa6124406cf2",
+        "userAvatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/164.jpg",
+        "userFullName": "Ruth Kuphal"
+      }
+    ]
+}

@@ -6,6 +6,7 @@ const useNotifications = () => {
       title: notificationTitle,
       message: notificationMessage,
       type: notificationType, // success or error
+      customClass: "notification",
     });
   };
 

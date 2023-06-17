@@ -17,6 +17,8 @@
           item-key="id"
           group="tasks"
           class="tasks__draggable"
+          :class="`${task.title.toLowerCase()}-column`"
+          :data-test="`${task.title.toLowerCase()}-column`"
           :component-data="getComponentData()"
           @update:model-value="updateModel(task.tickets, task.title)"
         >

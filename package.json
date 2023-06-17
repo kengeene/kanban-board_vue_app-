@@ -31,6 +31,7 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.4",
     "@babel/eslint-parser": "^7.22.5",
     "@faker-js/faker": "^8.0.2",
     "@vue/eslint-config-airbnb": "^5.3.0",
