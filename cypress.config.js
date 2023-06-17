@@ -18,6 +18,7 @@ module.exports = defineConfig({
   videosFolder: "tests/e2e/videos",
 
   e2e: {
+    baseUrl: "http://localhost:8080",
     specPattern: "tests/e2e/specs/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "tests/e2e/support/index.js",
     setupNodeEvents(on, config) {
