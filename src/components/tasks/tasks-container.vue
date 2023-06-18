@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row class="tasks__container">
+    <el-row v-loading.fullscreen.lock="loading" class="tasks__container">
       <el-col
         v-for="(task, index) in tasks"
         :key="index"
@@ -47,10 +47,12 @@ export default {
   setup() {
     const { get: getStatuses, statusList: statuses } = useStatus();
     const { get: getTasks, taskList, updateTaskStatuses, sortedTasks: tasks } = useTasks();
-
+    const loading = ref(false);
     onMounted(async () => {
-      await getStatuses();
-      await getTasks();
+      loading.value = true;
+      Promise.allSettled([getStatuses(), getTasks()]).then(() => {
+        loading.value = false;
+      });
     });
 
     const taskCount = computed(() => tasks.value.length);
@@ -77,6 +79,7 @@ export default {
     };
 
     return {
+      loading,
       updateModel,
       activeNames,
       getComponentData,
