@@ -7,7 +7,7 @@
       :destroy-on-close="true"
       :before-close="closeDialog"
     >
-      <el-form v-loading="loading" :model="form">
+      <el-form v-loading="loading" :model="form" label-width="170px" label-position="left">
         <el-form-item label="Ticket Title">
           <el-input v-model="form.title" autocomplete="off" data-test="title-field"></el-input>
         </el-form-item>
@@ -15,7 +15,7 @@
           <el-select
             v-model="form.taskType"
             data-test="task-type-dropdown"
-            placeholder="Please select an task type"
+            placeholder="Select a task type"
           >
             <el-option
               v-for="(task, index) in taskTypes"
@@ -45,7 +45,7 @@
           <el-select
             v-model="form.selectedUser"
             data-test="user-dropdown"
-            placeholder="Please select a user to assign the ticket to"
+            placeholder="Select a user"
             value-key="userId"
           >
             <el-option
