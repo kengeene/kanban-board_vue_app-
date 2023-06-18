@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "npm run mock:server & npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "mock:server": "json-server src/respository/index.js --routes src/respository/routes.json",
