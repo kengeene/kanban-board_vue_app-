@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "json-server src/respository/index.js & vue-cli-service serve",
-    "build": "json-server src/respository/index.js & vue-cli-service build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "mock:server": "json-server src/respository/index.js",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
