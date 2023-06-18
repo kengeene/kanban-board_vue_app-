@@ -22,6 +22,10 @@ Live Link: https://jovial-madeleine-2e845c.netlify.app/
 - vuedraggable
 - eslint
 - Prettier
+- AdonisJs(Server)
+
+# API Server
+When running the server locally, json-server is used to generate mock data and the endpoints needed for the app to run. For the app running in the production environment(https://jovial-madeleine-2e845c.netlify.app/), it's pointing to a Node(AdonisJs) application deployed on Fly.io
 
 # Testing
 
@@ -50,5 +54,5 @@ Here is a breakdown of all of the folders within the src directory:
     |
     views - This folder contains the application views
 
-# Appreication
+# Appreciation
 Thank you for taking your time to go through the project, if you have any useful/helpful tips on how I can make the project even more awesome feel free to reach me on kengeene@gmail.com
