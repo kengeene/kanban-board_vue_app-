@@ -126,6 +126,7 @@ export default {
   }
 
   &__draggable {
+    min-height: 70vh;
     max-height: 80vh;
     overflow: hidden;
     overflow-y: scroll;
