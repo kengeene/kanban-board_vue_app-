@@ -23,9 +23,11 @@ Live Link: https://jovial-madeleine-2e845c.netlify.app/
 - eslint
 - Prettier
 - AdonisJs(Server)
+- Fly.io(Backend App deployment)
+- Netlify(Frontend App deployment)
 
 # API Server
-When running the server locally, json-server is used to generate mock data and the endpoints needed for the app to run. For the app running in the production environment(https://jovial-madeleine-2e845c.netlify.app/), it's pointing to a Node(AdonisJs) application deployed on Fly.io
+When running the server locally, json-server is used to generate mock data and the endpoints needed for the app to run. For the app running in the production environment(https://jovial-madeleine-2e845c.netlify.app/), it's pointing to a Node(https://kanban-adonis-api.fly.dev/) application deployed on Fly.io
 
 # Testing
 
