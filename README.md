@@ -39,9 +39,10 @@ This project has both Unit tests(JEST) and E2E Tests(Cypress). They cover all of
 # Folder Structure
 Here is a breakdown of all of the folders within the src directory:
 
+```
 -src
-    |
-    api - This folder contains all of the endpoints needed
+  |
+   -api - This folder contains all of the endpoints needed
     |
     assets - This folder contains all assets the application needs
     |
@@ -58,6 +59,8 @@ Here is a breakdown of all of the folders within the src directory:
     utils - This folder contains utility helper methods
     |
     views - This folder contains the application views
+
+   ```
 
 # Appreciation
 Thank you for taking your time to go through the project, if you have any useful/helpful tips on how I can make the project even more awesome feel free to reach me on kengeene@gmail.com
