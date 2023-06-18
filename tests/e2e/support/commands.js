@@ -36,12 +36,12 @@ Cypress.on("uncaught:exception", () => {
 });
 
 Cypress.Commands.add("appStubs", () => {
-  cy.intercept("**/taskTypes", {
+  cy.intercept("**/tasks/types", {
     statusCode: 200,
     body: tasks.taskTypes,
     times: 1,
   }).as("taskTypes");
-  cy.intercept("**/taskStatuses", {
+  cy.intercept("**/tasks/statuses", {
     statusCode: 200,
     body: tasks.taskStatuses,
     times: 1,
