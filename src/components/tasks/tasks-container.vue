@@ -50,9 +50,14 @@ export default {
     const loading = ref(false);
     onMounted(async () => {
       loading.value = true;
-      Promise.allSettled([getStatuses(), getTasks()]).then(() => {
+      try {
+        await getStatuses();
+        await getTasks();
+      } catch (e) {
+        return e;
+      } finally {
         loading.value = false;
-      });
+      }
     });
 
     const taskCount = computed(() => tasks.value.length);
