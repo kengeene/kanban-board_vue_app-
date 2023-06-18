@@ -26,6 +26,9 @@ Live Link: https://jovial-madeleine-2e845c.netlify.app/
 - Fly.io(Backend App deployment)
 - Netlify(Frontend App deployment)
 
+# Setup
+When running the application locally run it with the `npm run dev` command, this will spin up the json server on port 3000 as well as the Frontend app on port 8080 or the next preceding available port.
+
 # API Server
 When running the server locally, json-server is used to generate mock data and the endpoints needed for the app to run. For the app running in the production environment(https://jovial-madeleine-2e845c.netlify.app/), it's pointing to a Node(https://kanban-adonis-api.fly.dev/) application deployed on Fly.io
 
