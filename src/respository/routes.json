@@ -1,0 +1,4 @@
+{
+    "/tasks/statuses": "/taskStatuses",
+    "/tasks/types": "/taskTypes"
+}
