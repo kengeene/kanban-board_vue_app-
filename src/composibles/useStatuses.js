@@ -1,4 +1,4 @@
-import { getStatuses } from "@/api/statuses";
+import { getStatuses } from "@/api/tasks";
 import useNotifications from "@/utils/notifications";
 import { computed } from "vue";
 import { useStore } from "vuex";

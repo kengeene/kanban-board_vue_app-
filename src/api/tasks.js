@@ -26,7 +26,15 @@ export async function getTasks(data) {
 
 export async function getTaskTypes(data) {
   return request({
-    url: `${process.env.VUE_APP_API_BASE_URL}taskTypes`,
+    url: `${process.env.VUE_APP_API_BASE_URL}tasks/types`,
+    method: "get",
+    data,
+  });
+}
+
+export async function getStatuses(data) {
+  return request({
+    url: `${process.env.VUE_APP_API_BASE_URL}tasks/statuses`,
     method: "get",
     data,
   });
