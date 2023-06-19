@@ -7,11 +7,18 @@
       :destroy-on-close="true"
       :before-close="closeDialog"
     >
-      <el-form v-loading="loading" :model="form" label-width="170px" label-position="left">
-        <el-form-item label="Ticket Title">
+      <el-form
+        ref="ruleFormRef"
+        v-loading="loading"
+        :model="form"
+        label-width="170px"
+        label-position="left"
+        :rules="rules"
+      >
+        <el-form-item label="Ticket Title" prop="title">
           <el-input v-model="form.title" autocomplete="off" data-test="title-field"></el-input>
         </el-form-item>
-        <el-form-item label="Task Type">
+        <el-form-item label="Task Type" prop="taskType">
           <el-select
             v-model="form.taskType"
             data-test="task-type-dropdown"
@@ -26,7 +33,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Choose the task status">
+        <el-form-item label="Choose the task status" prop="taskStatus">
           <el-select
             v-model="form.taskStatus"
             data-test="task-status-dropdown"
@@ -41,7 +48,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Assign the ticket">
+        <el-form-item label="Assign the ticket" prop="selectedUser">
           <el-select
             v-model="form.selectedUser"
             data-test="user-dropdown"
@@ -67,7 +74,7 @@
         </el-form-item>
         <span>
           <el-button @click="closeDialog()">Cancel</el-button>
-          <el-button type="primary" data-test="confirmButton" @click="submitForm()"
+          <el-button type="primary" data-test="confirmButton" @click="submitForm(ruleFormRef)"
             >Confirm</el-button
           >
         </span>
@@ -77,7 +84,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, reactive } from "vue";
 import useStatuses from "@/composibles/useStatuses";
 import useTasks from "@/composibles/useTasks";
 import useUsers from "@/composibles/useUsers";
@@ -101,10 +108,11 @@ export default {
   },
   setup(props, { emit }) {
     const displayDialog = ref(false);
+    const ruleFormRef = ref();
 
     const form = ref({
       id: "",
-      taskStatus: "",
+      taskStatus: "Pending",
       taskType: "",
       title: "",
       userAvatar: "",
@@ -116,6 +124,27 @@ export default {
         userId: "",
       },
     });
+
+    const validateSelectedUser = (rule, value, callback) => {
+      if (value.userId === "") {
+        callback(new Error("Please select a user to assign to"));
+      } else {
+        callback();
+      }
+    };
+
+    const rules = reactive({
+      selectedUser: [{ validator: validateSelectedUser, trigger: "blur" }],
+      title: [{ required: true, message: "Please input a title", trigger: "blur" }],
+      taskType: [{ required: true, message: "Please select a task type", trigger: "blur" }],
+      taskStatus: [
+        {
+          required: true,
+          message: "Please select a task status",
+        },
+      ],
+    });
+
     const loading = ref(false);
 
     const { statusList: statuses } = useStatuses();
@@ -145,16 +174,9 @@ export default {
       emit("closeDialog");
     };
 
-    const submitForm = async () => {
+    const handlePayload = async (payload) => {
       loading.value = true;
       try {
-        const payload = {
-          ...form.value,
-          ...form.value.selectedUser,
-        };
-
-        delete payload.selectedUser;
-
         props.isEdit ? await editTask(payload) : await createTask(payload);
       } catch (e) {
         return e;
@@ -197,7 +219,28 @@ export default {
       !taskDetails.value ?? (await getTasks());
     });
 
+    const submitForm = async (formEl) => {
+      if (!formEl) return;
+      // eslint-disable-next-line no-unused-vars
+      await formEl.validate((valid, fields) => {
+        if (valid) {
+          const payload = {
+            ...form.value,
+            ...form.value.selectedUser,
+          };
+
+          delete payload.selectedUser;
+          handlePayload(payload);
+        } else {
+          return;
+        }
+      });
+    };
+
     return {
+      validateSelectedUser,
+      rules,
+      ruleFormRef,
       closeDialog,
       displayDialog,
       loading,
